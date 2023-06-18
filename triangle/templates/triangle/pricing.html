@@ -1,0 +1,70 @@
+{% extends 'triangle/base.html' %}
+{% load static %}
+
+{% block links %}
+<link href="{% static 'triangle/css/style.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+
+{% block pricing %}
+<section class="container">
+    <div class="price-table">
+        <!-- row  happy-clients-->
+        <!-- <div class="happy-clients"> -->
+            {% for pricing in pricings %}
+            <div class="col-sm-6 col-md-3 pricing">
+                <div class="single-price price-one">
+                    <div class="table-heading">
+                        <p class="plan-name">{{pricing.name}}</p>
+                        <p class="plan-price"><span class="dollar-sign">$</span><span
+                                class="price">{{pricing.price}}</span><span class="month">/ Month</span></p>
+                    </div>
+                    <ul>
+                        {% if pricing.tilda %}
+                        <li>Tilda<span><i class="fa fa-check"></i></span></li>
+                        {% else %}
+                        <li>Tilda<span><i class="fa fa-times"></i></span></li>
+                        {% endif %}
+
+                        {% if pricing.word_press %}
+                        <li>Wordpress<span><i class="fa fa-check"></i></span></li>
+                        {% else %}
+                        <li>Wordpress<span><i class="fa fa-times"></i></span></li>
+                        {% endif %}
+
+                        {% if pricing.open_cart %}
+                        <li>Open Cart<span><i class="fa fa-check"></i></span> </li>
+                        {% else %}
+                        <li>Open Cart<span><i class="fa fa-times"></i></span> </li>
+                        {% endif %}
+
+                        {% if pricing.custom_development %}
+                        <li>Custom Development<span><i class="fa fa-check"></i></span></li>
+                        {% else %}
+                        <li>Custom Development<span><i class="fa fa-times"></i></span></li>
+                        {% endif %}
+
+                        {% if pricing.google_analytics %}
+                        <li>Google Analytics<span><i class="fa fa-check"></i></span></li>
+                        {% else %}
+                        <li>Google Analytics<span><i class="fa fa-times"></i></span></li>
+                        {% endif %}
+                    </ul>
+                    <a href="#" class="btn btn-buynow">Buy Now</a>
+                </div>
+            </div>
+            {% endfor %}
+
+        <!-- </div> -->
+    </div>
+</section>
+{% endblock %}

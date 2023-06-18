@@ -1,0 +1,9 @@
+.happy-clients{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.pricing{
+    padding-bottom: 50px;
+}

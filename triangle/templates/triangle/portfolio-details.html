@@ -1,0 +1,80 @@
+{% extends 'triangle/base.html' %}
+{% load static %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+{% block portfolio-details %}
+    <section id="portfolio-information" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <img src="{{media_url}}{{project.photo_big}}" class="img-responsive" alt="">
+                </div>
+                <div class="col-sm-6">
+                    <div class="project-name overflow">
+                        <h2 class="bold">{{project.name}}</h2>
+                        <ul class="nav navbar-nav navbar-default">
+                            <li><a href="#"><i class="fa fa-clock-o"></i>{{project.mounth}} {{project.day}},{{project.year}}</a></li>
+                        </ul>
+                    </div>
+                    <div class="project-info overflow">
+                        <h3>Project Info</h3>
+                        <p>{{project.description}}</p>
+                    </div>
+                    <div class="skills overflow">
+                        <h3>Skills:</h3>
+                        <ul class="nav navbar-nav navbar-default">
+                            {% for skill in project.skills.all %}
+                                <li><a href="#"><i class="fa fa-check-square"></i>{{skill.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="client overflow">
+                        <h3>Client:</h3>
+                        <ul class="nav navbar-nav navbar-default">
+                            {% for client in project.client.all %}
+                                <li><a href="#"><i class="fa fa-bolt"></i>{{client.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!--/#portfolio-information-->
+
+    <section id="related-work" class="padding-top padding-bottom">
+        <div class="container">
+            <div class="row">
+                    <h1 class="title text-center">Related Work</h1>
+                    {% for pelated_project in project.projects.all %}
+                        <div class="col-sm-3">
+                            <div class="portfolio-wrapper">
+                                <div class="portfolio-single">
+                                    <div class="portfolio-thumb">
+                                        <img src="{{media_url}}{{pelated_project.photo_small}}" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="portfolio-view">
+                                        <ul class="nav nav-pills">
+                                            <li><a href="{% url 'portfolio-item' pelated_project.slug %}"><i class="fa fa-link"></i></a></li>
+                                            <li><a href="{{media_url}}{{pelated_project.photo_big}}" data-lightbox="example-set"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="portfolio-info ">
+                                    <h2>{{pelated_project.name}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

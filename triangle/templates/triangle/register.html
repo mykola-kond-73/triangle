@@ -1,0 +1,35 @@
+{% extends 'triangle/base.html' %}
+
+{% block breadcrumbs %}
+{% endblock %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block register-form %}
+    <form  method="post" action="{% url 'add-user' %}" id="main-comment-form" name="comment-form" enctype="multipart/form-data">
+        {% csrf_token %} 
+
+        {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <div>{{eror}}</div>
+            {% endfor %}
+        {% endif %}
+        {{form.non_field_errors}}
+
+        {{form.as_p}}
+        
+        <div class="form-group">
+            <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+        </div>
+    </form>
+{% endblock %}

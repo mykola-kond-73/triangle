@@ -1,0 +1,60 @@
+{% extends 'triangle/base.html' %}
+{% load static %}
+
+{% block links %}
+    <link href="{% static 'triangle/css/style.css'%}" rel="stylesheet">
+{% endblock %}
+
+{% block services-page %}
+    <section id="company-information" class="choose">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="0ms">
+                    <img src="{% static 'triangle/images/services/service.png' %}" class="img-responsive" alt="">
+                </div>
+                <div class="col-sm-6 padding-top wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="0ms">
+                    <h2>Why Choose Us?</h2>
+                    <p>Nisi commodo bresaola, leberkas venison eiusmod bacon occaecat labore<br /> tail corned beef Capicola nisi flank sed.</p>
+                    <ul class="elements">
+                        <li class="wow fadeInUp" data-wow-duration="900ms" data-wow-delay="100ms"><i class="fa fa-angle-right"></i> when an unknown printer took a galley of type</li>
+                        <li class="wow fadeInUp" data-wow-duration="800ms" data-wow-delay="200ms"><i class="fa fa-angle-right"></i> scrambled it to make a type specimen book.</li>
+                        <li class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms"><i class="fa fa-angle-right"></i> scrambled it to make a type specimen book.</li>
+                        <li class="wow fadeInUp" data-wow-duration="600ms" data-wow-delay="400ms"><i class="fa fa-angle-right"></i> scrambled it to make a type specimen book.</li>
+                        <li class="wow fadeInUp" data-wow-duration="500ms" data-wow-delay="500ms"><i class="fa fa-angle-right"></i> but also the leap into electronic typesetting.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block projects %}
+    <section id="recent-projects" class="recent-projects">
+        <div class="container">
+            <div class="row">
+                <h1 class="title text-center wow fadeInDown" data-wow-duration="500ms" data-wow-delay="300ms">Recent Projects</h1>
+                <p class="text-center padding-bottom wow fadeInDown" data-wow-duration="400ms" data-wow-delay="400ms">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br>
+                Ut enim ad minim veniam, quis nostrud </p>
+                {% for project in projects %}
+                    <div class="col-sm-3 col-xs-6 wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        <div class="portfolio-wrapper">   
+                            <div class="portfolio-single">
+                                <div class="portfolio-thumb">
+                                    <img src="{{media_url}}{{project.photo_small}}" class="img-responsive" alt="">
+                                </div>
+                                <div class="portfolio-view">
+                                    <ul class="nav nav-pills">
+                                        <li><a href="{{media_url}}{{project.photo_small}}" data-lightbox="example-set"><i class="fa fa-eye"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="portfolio-info">
+                                <h2>{{project.name}}</h2>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

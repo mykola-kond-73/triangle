@@ -1,0 +1,24 @@
+{% extends 'triangle/base.html' %}   
+{% load static %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+{% block scripts%}
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script type="text/javascript" src="{% static 'triangle/js/gmaps.js' %}"></script>
+{% endblock %}
+
+{% block contacts %}
+    <section id="map-section">
+        <div class="container">
+            <div id="gmap"></div>
+        </div>
+    </section>       
+{% endblock %}

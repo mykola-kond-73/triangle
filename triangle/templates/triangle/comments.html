@@ -1,0 +1,47 @@
+{% if comments|length > 0 %}
+    <div class="response-area">
+    <h2 class="bold">Comments</h2>
+    <ul class="media-list">
+        {% for comment in comments %}
+            <li class="media">
+                <div class="post-comment">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="{{media_url}}{{comment.user.photo_big}}" alt="">
+                    </a>
+                    <div class="media-body">
+                        <span><i class="fa fa-user"></i>{{comment.user.name}}</span>
+                        <p>{{comment.text}}</p>
+                        <ul class="nav navbar-nav post-nav">
+                            <li><a href="#"><i class="fa fa-clock-o"></i>{{comment.mounth}} {{comment.day}},{{comment.year}}</a></li>
+                            <!-- <li><a href="{% url 'add-comment' %}?comment_id={{comment.pk}}&user_id={{comment.user.pk}}"><i class="fa fa-reply"></i>Reply</a></li> -->
+                            <li><a href="{% url 'add-comment' %}?comment_id={{comment.pk}}&user_id={{user_id}}&post={{post.slug}}"><i class="fa fa-reply"></i>Reply</a></li>
+                            <!-- користувача потрібно брати із сесії -->
+                        </ul>
+                    </div>
+                </div>
+                {% if comment.answers|length > 0 %}
+                    <div class="parrent">
+                        <ul class="media-list">
+                            {% for answer in comment.answers %}
+                                <li class="post-comment reply">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object" src="{{media_url}}{{answer.user.photo_big}}" alt="">
+                                    </a>
+                                    <div class="media-body">
+                                        <span><i class="fa fa-user"></i>{{answer.user.name}}</span>
+                                        <p>{{answer.text}}</p>
+                                        <ul class="nav navbar-nav post-nav">
+                                            <li><a href="#"><i class="fa fa-clock-o"></i>{{answer.mounth}} {{answer.day}},{{answer.year}}</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            </li>
+        {% endfor %}
+        
+    </ul>                   
+    </div>
+{% endif %}

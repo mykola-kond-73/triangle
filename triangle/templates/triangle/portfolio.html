@@ -1,0 +1,58 @@
+{% extends 'triangle/base.html' %}
+{% load static %}
+{% load triangle_tags %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'triangle/js/jquery.isotope.min.js' %}"></script>
+{% endblock %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+{% block portfolio %}
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <ul class="portfolio-filter text-center">
+                    <li><a class="btn btn-default active" href="#" data-filter="*">All</a></li>
+
+                    {% for section in sections %}
+                        <li><a class="btn btn-default" href="#" data-filter=".{{section.slug}}">{{section.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                    
+                <div class="portfolio-items">
+                    {% for project in page_obj %}
+                        <div class="col-xs-6 col-sm-4 col-md-3 portfolio-item {{project.section_str}}">
+                            <div class="portfolio-wrapper">
+                                <div class="portfolio-single">
+                                    <div class="portfolio-thumb">
+                                        <img src="{{media_url}}{{project.photo_small}}" class="img-responsive" alt="">
+                                    </div>
+                                    <div class="portfolio-view">
+                                        <ul class="nav nav-pills">
+                                            <li><a href="{% url 'portfolio-item' project.slug %}"><i class="fa fa-link"></i></a></li>
+                                            <li><a href="{{media_url}}{{project.photo_big}}" data-lightbox="example-set"><i class="fa fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="portfolio-info ">
+                                    <h2>{{project.name}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% paginator page_obj %}
+
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,27 @@
+<div class="blog-pagination">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+            {% if anchor %}
+                <li class="left"><a href="?{{attr_name}}={{ page_obj.previous_page_number }}#{{anchor}}">left</a></li>
+            {% else %}
+                <li class="left"><a href="?{{attr_name}}={{ page_obj.previous_page_number }}">left</a></li>
+            {% endif %}
+        {% endif %}
+
+        {% for p in page_obj.paginator.page_range %}
+            {% if anchor %}
+                <li class="active"><a href="?{{attr_name}}={{p}}#{{anchor}}">{{p}}</a></li>
+            {% else %}
+                <li class="active"><a href="?{{attr_name}}={{p}}">{{p}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+            {% if anchor %}
+                <li class="right"><a href="?{{attr_name}}={{ page_obj.next_page_number }}#{{anchor}}">right</a></li>
+            {% else %}
+                <li class="right" ><a href="?{{attr_name}}={{ page_obj.next_page_number }}">right</a></li>
+            {% endif %}
+        {% endif %}
+    </ul>
+</div>

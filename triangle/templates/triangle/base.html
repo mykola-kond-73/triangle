@@ -1,0 +1,399 @@
+{% load static %}
+{% load triangle_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{{title}}</title>
+
+    <link href="{% static 'triangle/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static 'triangle/css/font-awesome.min.css'%}" rel="stylesheet">
+    <link href="{% static 'triangle/css/animate.min.css'%}" rel="stylesheet"> 
+    <link href="{% static 'triangle/css/lightbox.css'%}" rel="stylesheet"> 
+	<link href="{% static 'triangle/css/main.css'%}" rel="stylesheet">
+	<link href="{% static 'triangle/css/responsive.css'%}" rel="stylesheet">
+
+
+    <!--[if lt IE 9]>
+	    <script src="js/html5shiv.js"></script>
+	    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'triangle/images/ico/favicon.ico'%}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'triangle/images/ico/apple-touch-icon-144-precomposed.png'%}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'triangle/images/ico/apple-touch-icon-114-precomposed.png'%}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'triangle/images/ico/apple-touch-icon-72-precomposed.png'%}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'triangle/images/ico/apple-touch-icon-57-precomposed.png'%}">
+
+    {% block links %}
+    {% endblock %}
+
+</head><!--/head-->
+
+<body>
+    
+    {% block content %}
+        {% block header %}
+            <header id="header">      
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 overflow">
+                        <div class="social-icons pull-right">
+                                <ul class="nav nav-pills">
+                                    <li><a href=""><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href=""><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href=""><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href=""><i class="fa fa-dribbble"></i></a></li>
+                                    <li><a href=""><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar navbar-inverse" role="banner">
+                    <div class="container">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <a class="navbar-brand" href="index.html">
+                                <h1><img src="{% static 'triangle/images/logo.png'%}" alt="logo"></h1>
+                            </a>
+                            
+                        </div>
+                        <div class="collapse navbar-collapse">
+                            <ul id="main-menu" class="nav navbar-nav navbar-right my_main_menu">
+                                {% if title == 'Triangle' %}
+                                    <li class="active"><a href="#">Home</a></li>
+                                {% else %}
+                                    <li class=""><a href="{% url 'home' %}">Home</a></li>
+                                {% endif %}
+                                
+                                {% if title == 'About Us' or title == 'Services' or title == 'Pricing' or title == 'Contact Us' %}
+                                    <li class="active"><a href="#">Pages <i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            {% if title == 'About Us' %}
+                                                <li class="active"><a href="#">About</a></li>
+                                            {% else %}
+                                                <li><a href="{% url 'about' %}">About</a></li>
+                                            {% endif %}
+
+                                            {% if title == 'Services' %}
+                                                <li class="active"><a href="#">Services</a></li>
+                                            {% else %}
+                                                <li><a href="{% url 'services' %}">Services</a></li>
+                                            {% endif %}
+
+                                            {% if title == 'Pricing' %}
+                                                <li class="active"><a href="#">Pricing</a></li>
+                                            {% else %}
+                                                <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                                            {% endif %}
+
+                                            {% if title ==  'Contact Us' %}
+                                                <li class="active"><a href="#">Contact us</a></li>
+                                            {% else %}
+                                                <li><a href="{% url 'contacts' %}">Contact us</a></li>
+                                            {% endif %}
+                                        </ul>
+                                    </li>    
+                                {% else %}
+                                    <li class=""><a href="#">Pages <i class="fa fa-angle-down"></i></a>
+                                        <ul role="menu" class="sub-menu">
+                                            <li><a href="{% url 'about' %}">About</a></li>
+                                            <li><a href="{% url 'services' %}">Services</a></li>
+                                            <li><a href="{% url 'pricing' %}">Pricing</a></li>
+                                            <li><a href="{% url 'contacts' %}">Contact us</a></li>
+                                        </ul>
+                                    </li>  
+                                {% endif %}  
+
+                                {% if title == 'Blog' %}
+                                    <li class="active"><a href="{% url 'blog' %}">Blog <i class="fa"></i></a></li>
+                                {% else %}
+                                    <li class=""><a href="{% url 'blog' %}">Blog <i class="fa"></i></a></li>
+                                {% endif %}
+
+                                {% if title == 'Portfolio' %}
+                                    <li class="active"><a href="{% url 'portfolio' %}">Portfolio <i class="fa"></i></a></li>    
+                                {% else %}
+                                    <li class=""><a href="{% url 'portfolio' %}">Portfolio <i class="fa"></i></a></li>    
+                                {% endif %}      
+                                
+                                {% if user_id == 'None' %}
+                                    {% if title == 'Login' %}
+                                        <li class="active"><a href="{% url 'login' %}">Login <i class="fa"></i></a></li>    
+                                    {% else %}
+                                        <li class=""><a href="{% url 'login' %}">Login <i class="fa"></i></a></li>    
+                                    {% endif %}  
+                                {% else %}
+                                    <li class=""><a href="{% url 'logout' %}">Logout <i class="fa"></i></a></li>    
+                                {% endif %}
+
+                                {% if user_id == 'None' %}
+                                    {% if title == 'Register' %}
+                                        <li class="active"><a href="{% url 'add-user' %}">Register <i class="fa"></i></a></li>    
+                                    {% else %}
+                                        <li class=""><a href="{% url 'add-user' %}">Register <i class="fa"></i></a></li>    
+                                    {% endif %}
+                                {% endif %}
+
+                                {% if title == 'Order' %}
+                                    <li class="active"><a href="{% url 'order' %}?user_id={{user_id}}">Order <i class="fa"></i></a></li>    
+                                {% else %}
+                                    <li class=""><a href="{% url 'order' %}?user_id={{user_id}}">Order <i class="fa"></i></a></li>    
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </div>
+            </header>
+        {% endblock %}
+
+        {% block slider %}
+        {% endblock %}
+
+        {% block breadcrumbs %}
+            <section id="page-breadcrumb">
+                <div class="vertical-center sun">
+                    <div class="container">
+                        <div class="row">
+                            <div class="action">
+                                <div class="col-sm-12">
+                                    <h1 class="title">{{title}}</h1>
+                                    <p>Why our Clients love to work with us.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+    
+        {% block aboutus-page %}
+        {% endblock %}
+
+        {% block services-page %}
+        {% endblock %}
+
+        {% block pricing %}
+        {% endblock %}
+
+        {% block contacts %}
+        {% endblock %}
+
+        {% block blog %}
+        {% endblock %}
+
+        {% block blog-details %}
+        {% endblock %}
+
+        {% block portfolio %}
+        {% endblock %}
+
+        {% block portfolio-details %}
+        {% endblock %}
+
+        {% block add-comment-form %}
+        {% endblock %}
+
+        {% block add-response-form %}
+        {% endblock %}
+
+        {% block register-form %}
+        {% endblock %}
+
+        {% block login-form %}
+        {% endblock %}
+
+        {% block order-form %}
+        {% endblock %}
+        
+
+        {% block services %}
+            <section id="services">
+                <div class="container">
+                    <div class="row">
+                        {% for service in services %}
+                            <div class="col-sm-4 text-center padding wow fadeIn" data-wow-duration="1000ms" data-wow-delay="300ms">
+                                <div class="single-service">
+                                    <div class="wow scaleIn" data-wow-duration="500ms" data-wow-delay="300ms">
+                                        <img src="{{media_url}}{{service.photo}}" alt="">
+                                    </div>
+                                    <h2>{{service.name}}</h2>
+                                    <p>{{service.description}}</p>
+                                </div>
+                            </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+    
+        {% block action %}
+            <section id="action" class="responsive">
+                <div class="vertical-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="action take-tour">
+                                <div class="col-sm-7 wow fadeInLeft" data-wow-duration="500ms" data-wow-delay="300ms">
+                                    <h1 class="title">Triangle Corporate Template</h1>
+                                    <p>A responsive, retina-ready &amp; wide multipurpose template.</p>
+                                </div>
+                                <div class="col-sm-5 text-center wow fadeInRight" data-wow-duration="500ms" data-wow-delay="300ms">
+                                    <div class="tour-button">
+                                        <a href="#" class="btn btn-common">TAKE THE TOUR</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        {% endblock %}
+    
+        {% block filling %}
+        {% endblock %}
+    
+        {% block employees %}
+        {% endblock %}
+
+        {% block projects %}
+        {% endblock %}
+
+        {% block clients %}
+            <section id="clients">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="clients text-center wow fadeInUp" data-wow-duration="500ms" data-wow-delay="300ms">
+                                <p><img src="{% static 'triangle/images/home/clients.png'%}" class="img-responsive" alt=""></p>
+                                <h1 class="title">Happy Clients</h1>
+                                <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. <br> Ut enim ad minim veniam, quis nostrud </p>
+                            </div>
+                            <div class="clients-logo wow fadeIn" data-wow-duration="1000ms" data-wow-delay="600ms">
+                                <div class="happy-clients">
+                                    {% for client in clients %}
+                                        <div class="col-xs-3 col-sm-2">
+                                            <img src="{{media_url}}{{client.photo_small}}" class="img-responsive" alt="">
+                                            <p>{{client.user.name}}</p>
+                                        </div>
+                                    {% endfor  %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>   
+        {% endblock %}
+
+        {% block footer %}
+            <footer id="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 text-center bottom-separator">
+                            <img src="{% static 'triangle/images/home/under.png' %}" class="img-responsive inline" alt="">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div id="testimonial" class="testimonial bottom">
+                                <h2>Testimonial</h2>
+                                {% for response in c_page_obj %}
+                                    <div class="media">
+                                        <div class="pull-left">
+                                            <a href="#"><img src="{{media_url}}{{response.user.photo_small}}" alt=""></a>
+                                        </div>
+                                        <div class="media-body">
+                                            <blockquote>{{response.text}}</blockquote>
+                                            <h3><a href="#">{{response.user.name}}</a></h3>
+                                            <p>{{response.time_create}}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}   
+                                
+                                {% paginator page_obj=c_page_obj attr_name='c_page' anchor='testimonial' %}
+
+                                <div class="col-sm-5 text-center" >
+                                    <a href="{% url 'add-response' %}?user_id={{user_id}}" class="btn btn-common">Add Response</a>
+                                </div>
+                                
+                            </div> 
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="contact-info bottom">
+                                <h2>Contacts</h2>
+                                <address>
+                                E-mail: <a href="mailto:someone@example.com">email@email.com</a> <br> 
+                                Phone: +1 (123) 456 7890 <br> 
+                                Fax: +1 (123) 456 7891 <br> 
+                                </address>
+            
+                                <h2>Address</h2>
+                                <address>
+                                Unit C2, St.Vincent's Trading Est., <br> 
+                                Feeder Road, <br> 
+                                Bristol, BS2 0UY <br> 
+                                United Kingdom <br> 
+                                </address>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <div class="contact-form bottom">
+                                <h2>Send a message</h2>
+                                <form  method="post" action="{% url 'add-message' %}" id="main-contact-form" name="contact-form">
+                                    {% csrf_token %} 
+            
+                                    {% if add_message_form.non_field_errors %}
+                                        {% for error in add_message_form.non_field_errors %}
+                                            <div>{{eror}}</div>
+                                        {% endfor %}
+                                    {% endif %}
+                                    {{add_message_form.non_field_errors}}
+                                    <div class="form-group">
+                                        {{add_message_form.name.errors}}
+                                        {{add_message_form.name}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{add_message_form.email.errors}}
+                                        {{add_message_form.email}}
+                                    </div>
+                                    <div class="form-group">
+                                        {{add_message_form.text.errors}}
+                                        {{add_message_form.text}}
+                                    </div>                        
+                                    <div class="form-group">
+                                        <input type="submit" name="submit" class="btn btn-submit" value="Submit">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="copyright-text text-center">
+                                <p>&copy; Your Company 2014. All Rights Reserved.</p>
+                                <p>Designed by <a target="_blank" href="http://www.themeum.com">Themeum</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        {% endblock %}
+    {% endblock %}
+
+    <script type="text/javascript" src="{% static 'triangle/js/jquery.js'%}"></script>
+    <script type="text/javascript" src="{% static 'triangle/js/bootstrap.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'triangle/js/lightbox.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'triangle/js/wow.min.js'%}"></script>
+    <script type="text/javascript" src="{% static 'triangle/js/main.js'%}"></script>
+    
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

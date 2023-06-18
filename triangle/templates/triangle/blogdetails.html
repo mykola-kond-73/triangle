@@ -1,0 +1,77 @@
+{% extends 'triangle/base.html' %}
+{% load static %}
+{% load triangle_tags %}
+
+{% block services %}
+{% endblock %}
+
+{% block action %}
+{% endblock %}
+
+{% block clients %}
+{% endblock %}
+
+{% block blog-details %}
+    <section id="blog-details" class="padding-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 col-sm-7">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="single-blog blog-details two-column">
+                                <div class="post-thumb">
+                                    <a href="#"><img src="{{media_url}}{{post.photo}}" class="img-responsive" alt=""></a>
+                                    <div class="post-overlay">
+                                        <span class="uppercase"><a href="#">{{post.day}} <br><small>{{post.mounth}}</small></a></span>
+                                    </div>
+                                </div>
+                                <div class="post-content overflow">
+                                    <h2 class="post-title bold"><a href="#">{{post.name}}</a></h2>
+                                    <p>{{post.description}}</p>
+                                    <div class="post-bottom overflow">
+                                        <ul class="nav navbar-nav post-nav">
+                                            <li><a href="#"><i class="fa fa-heart"></i>{{post.likes}} Love</a></li>
+                                            <!-- <li><a href="{% url 'add-comment' %}?post_id={{post.pk}}&user_id={{comment.user.pk}}"><i class="fa fa-comments"></i>{{post.coment_count}} Comments</a></li> -->
+                                            <li><a href="{% url 'add-comment' %}?post_id={{post.pk}}&user_id={{user_id}}&post={{post.slug}}"><i class="fa fa-comments"></i>{{post.coment_count}} Comments</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="blog-share">
+                                        <span class='st_facebook_hcount'></span>
+                                        <span class='st_twitter_hcount'></span>
+                                        <span class='st_linkedin_hcount'></span>
+                                        <span class='st_pinterest_hcount'></span>
+                                        <span class='st_email_hcount'></span>
+                                    </div>
+
+                                    {% comments comments media_url post user_id %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-5">
+                    <div class="sidebar blog-sidebar">
+                        <div class="sidebar-item categories">
+                            <h3>Categories</h3>
+                            <ul class="nav navbar-stacked">
+                                {% for category in post.categories.all %}
+                                    <li class=""><a href="{% url 'blog'%}?cat={{category.slug}}">{{category.name}}<span class="pull-right">({{category.post_count}})</span></a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar-item tag-cloud">
+                            <h3>Tag Cloud</h3>
+                            <ul class="nav nav-pills">
+                                {% for tag in post.tags.all %}
+                                    <li><a href="{% url 'blog'%}?tag={{tag.slug}}">{{tag.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
